@@ -1,11 +1,11 @@
 // File Name: index.js
 
 // Import express
-let express = require ('express'),
-    app = express(),
-    port = process.env.PORT || 3005,
-    bodyParser = require('body-parser');
-    controller = require('./controller');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3005;
+const bodyParser = require('body-parser');
+controller = require('./controller');
 
 const cors = require('cors');
 
@@ -15,10 +15,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Getting routes for the server
-let routes = require('./routes');
-routes(app)
+const routes = require('./routes');
+routes(app);
 
 // Launch app to listen to specified port
-app.listen(port, function () {
-    console.log("Running RestHub on port " + port);
+app.listen(port, function() {
+  console.log('Running RestHub on port ' + port);
 });
