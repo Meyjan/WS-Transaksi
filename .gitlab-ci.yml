@@ -1,14 +1,44 @@
+image: node:latest
+
 before_script:
-  - npm install
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
 cache:
   paths:
     - node_modules/
+
 stages:
-  - lint
+  - build
+  - test
+  - deploy
+
+install_dependencies:
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
 
 eslint:
-  stage: lint
+  stage: test
   tags:
   - node
   script: 
   - ./node_modules/.bin/eslint .
+
+deploy:dev:
+  stage: deploy
+  script:
+    - pm2 delete --silent ws_transaksi || ':'
+    - cd ~
+    - rm -rf ws-transaksi
+    - git clone git@gitlab.informatika.org:if3110-2019-02-k02-01/ws-transaksi.git
+    - cd ws-transaksi
+    - npm install
+    - pm2 start npm -- start --name ws_transaksi
+    - pm2 status
+  only:
+    - master
+    - development
+    - feature/F02-CI-CD
