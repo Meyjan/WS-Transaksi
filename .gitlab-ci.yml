@@ -34,7 +34,7 @@ deploy:dev:
     - git clone git@gitlab.informatika.org:if3110-2019-02-k02-01/ws-transaksi.git
     - cd ws-transaksi
     - npm install
-    - pm2 start npm -- start --name ws_transaksi
+    - pm2 start node server.js --name ws_transaksi
     - pm2 status
   only:
     - master
