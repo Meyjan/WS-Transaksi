@@ -33,6 +33,7 @@ deploy:dev:
     - rm -rf ws-transaksi
     - git clone git@gitlab.informatika.org:if3110-2019-02-k02-01/ws-transaksi.git
     - cd ws-transaksi
+    - git checkout feature/F02-CI-CD
     - npm install
     - pm2 start node server.js --name ws_transaksi
     - pm2 status
