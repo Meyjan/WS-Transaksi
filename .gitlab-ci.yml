@@ -1,0 +1,14 @@
+before_script:
+  - npm install
+cache:
+  paths:
+    - node_modules/
+stages:
+  - lint
+
+eslint:
+  stage: lint
+  tags:
+  - node
+  script: 
+  - ./node_modules/.bin/eslint .
